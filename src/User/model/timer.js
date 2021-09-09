@@ -1,27 +1,44 @@
-module.exports  = class Timer {
-    constructor(Users) {
-        this.Users=users;
-        this.nextusuarioeliminar=undefined;
+const User = require("./user");
+module.exports = class Timer {
+    constructor(users) {
+        this.Users = users;
+        this.nextusuarioeliminar = undefined;
     }
 
-    addUser(user){
-        this.Users.add(user);
-        if(this.nextusuarioeliminar==undefined)
-            this.nextusuarioeliminar=user;
+    addUser(user, id) {
+        this.Users[id] = user;
+        if (this.nextusuarioeliminar == undefined)
+            this.nextusuarioeliminar = user;
     }
+
     eliminarultimo() {
-       this.Users.splice(Users.indexOf(this.nextusuarioeliminar),1);
+
+        this.Users[this.nextusuarioeliminar.id] = undefined;
 
     }
-    getNextUserEliminar(){
-        let userEliminar =Users[1];
-        this.Users.forEach(user=>{
-            if(user.timeStamp<userEliminar)
-                userEliminar = user;
-        });
-        this.nextusuarioeliminar=userEliminar;
-    }
 
+    getNextUserEliminar() {
+        let userEliminar = new User("", "", Date.now(), 100000);
+        let undefinedvar = false;
+        if (this.Users.length != 0) {
+            for (let i = 0; i < this.Users.length; i++) {
+                if (this.Users[i] == undefined) {
+                    undefinedvar = true;
+                    break;
+                }
+                if (this.Users[i].timeStamp < userEliminar.timeStamp) {
+                    userEliminar = this.Users[i];
+                }
+
+            }
+        }
+
+        if (undefinedvar)
+            this.nextusuarioeliminar = undefined;
+        else
+            this.nextusuarioeliminar = userEliminar;
+
+    }
 
 
 }

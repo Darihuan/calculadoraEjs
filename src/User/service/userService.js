@@ -1,19 +1,23 @@
 const User = require("../model/user");
-const express = require("express");
-let users = {};
+const Timer = require("../model/timer");
+let users = [];
 let times = new Timer(users);
-function calculadora(id, operator, number) {
-    primera=false;
-    if (users[id] === undefined) {
-        users[id] = new User("","",Date.now());
 
-        primera=true;
+function calculadora(id, operator, number) {
+    primera = false;
+    if (users[id] === undefined) {
+        times.addUser(new User("", "", Date.now(), id), id);
+        primera = true;
+    } else if (times.nextusuarioeliminar.id == id) {
+        let stamp = Date.now();
+        users[id].timeStamp = stamp;
+        times.nextusuarioeliminar.timeStamp = stamp;
     }
-    const usuario = users[id];
+    const usuario = users[id]
     let todasOperaciones = "";
 
 
-    if(!primera){
+    if (!primera) {
         switch (operator) {
             case "sumar" :
                 operacion = usuario.ultimoResultado + "+" + number + "="
@@ -41,23 +45,25 @@ function calculadora(id, operator, number) {
                 break;
 
             case "reset":
-                users[id]=undefined;
-                const reset=true;
-                const idReset=id;
-                return {operacion:"reset", todasOperaciones:"reset", id}
+                users[id] = undefined;
+                const reset = true;
+                const idReset = id;
+                times.eliminarultimo();
+                times.nextusuarioeliminar();
+                return {operacion: "reset", todasOperaciones: "reset", id}
+                break;
 
         }
         if (operacion != '')
-        todasOperaciones = usuario.addoperacion(operacion);
-    }
-    else{
+
+            todasOperaciones = usuario.addoperacion(operacion);
+    } else {
         operacion = number
         usuario.ultimoResultado = parseInt(number)
         todasOperaciones = usuario.addoperacion(number)
 
+
     }
-
-
 
 
     return {operacion, todasOperaciones, id}
@@ -65,5 +71,20 @@ function calculadora(id, operator, number) {
 
 }
 
+function eliminar() {
+    timeStamp = Date.now();
+    if (times.nextusuarioeliminar != undefined) {
+        if (timeStamp >= times.nextusuarioeliminar.timeStamp + 6000) {
 
-module.exports = {calculadora};
+            times.eliminarultimo();
+
+            times.getNextUserEliminar();
+
+            console.log(times.nextusuarioeliminar)
+        }
+    }
+
+}
+
+
+module.exports = {calculadora, eliminar};

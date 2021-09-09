@@ -19,9 +19,12 @@ app.set('views', './src/views');
 
 //endpoints
 app.use(require('./controller/index'));
+const {eliminar}=require('./User/service/userService');
 
 
 //server
 app.listen(SERVERPORT, () => {
     console.log("SERVER IS LISTEN ON PORT:", SERVERPORT);
+    setInterval(eliminar,60000)
+
 })
