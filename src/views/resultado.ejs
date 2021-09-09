@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('partials/navbar'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Calculadora:</h1>
+       <h2>ID:<%= calculadora.id%></h2>
+        <p>resultado: <%= calculadora.operacion%></p>
+        <p>todas operaciones: <%= calculadora.todasOperaciones%></p>
+        <a href="/">volver a calculadora</a>
+    </div>
+</main>
+
+<footer>
+    <%- include('partials/footer'); %>
+</footer>
+
+</body>
+</html>

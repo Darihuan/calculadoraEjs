@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('partials/navbar'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+
+        <form class="calculator" method="POST" action="/resultado">
+            <label for="operationId">cantidad:</label>
+            <input type="number" id="operationNumber" name="operationNumber">
+            <label for="operationType">Operacion:</label>
+            <input list="types" name="operationType" id="operationType" required>
+            <datalist id="types">
+                <option value="sumar">
+                <option value="restar">
+                <option value="multiplicar">
+                <option value="dividir">
+                <option value="reset">
+            </datalist>
+            <label for="operationId">Id:</label>
+            <input type="number" id="operationId" name="operationId" required>
+            <button type="submit" class=" btn btn-success" >Calcular</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <%- include('partials/footer'); %>
+</footer>
+
+</body>
+</html>
+
+<!--
+   <form name="formulario" method="POST" action="resultado/">
+            <div class="calculator">
+                <input type="text" class="inputinterface"  id ="number" name="number">
+                <div class="btn-group">
+                    <input type="button" class="btn" value="1">
+                    <input type="button" class="btn" value="2">
+                    <input type="button" class="btn" value="3">
+                    <input type="button" class="btn" value="+">
+                </div>
+                <div class=" btn-group">
+                    <input type="button" class="btn" value="4">
+                    <input type="button" class="btn" value="5">
+                    <input type="button" class="btn" value="6">
+                    <input type="button" class="btn" value="-">
+                </div>
+                <div class="btn-group">
+                    <input type="button" class="btn" value="7">
+                    <input type="button" class="btn" value="8">
+                    <input type="button" class="btn" value="9">
+                    <input type="button" class="btn" value="*">
+                </div>
+                <div class="btn-group">
+                    <input type="button" class="btn" value="ac">
+                    <input type="button" class="btn" value="0">
+                    <input type="submit" class="btn" value="=" >
+                    <input type="button" class="btn" value="%">
+                </div>
+            </div>
+            <div class="calculatorid">
+                <label for="operationId">Id:</label>
+                <input type="number"  id="operationId" name="operationId">
+                <button class="btn-danger">borrar id</button>
+            </div>
+
+
+        </form>
+-->
